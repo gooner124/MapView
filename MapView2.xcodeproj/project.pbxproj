@@ -24,6 +24,8 @@
 		34B3868B1C5A95FA0054586A /* turntotech.png in Resources */ = {isa = PBXBuildFile; fileRef = 34B3868A1C5A95FA0054586A /* turntotech.png */; };
 		34B3868E1C5A98550054586A /* eisenbergs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 34B3868C1C5A98550054586A /* eisenbergs.jpg */; };
 		34B3868F1C5A98550054586A /* indikitch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 34B3868D1C5A98550054586A /* indikitch.jpg */; };
+		34B386941C5AB1BA0054586A /* WebPageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B386921C5AB1B90054586A /* WebPageViewController.m */; };
+		34B386951C5AB1BA0054586A /* WebPageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 34B386931C5AB1B90054586A /* WebPageViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +63,9 @@
 		34B3868A1C5A95FA0054586A /* turntotech.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = turntotech.png; sourceTree = SOURCE_ROOT; };
 		34B3868C1C5A98550054586A /* eisenbergs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = eisenbergs.jpg; sourceTree = SOURCE_ROOT; };
 		34B3868D1C5A98550054586A /* indikitch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = indikitch.jpg; sourceTree = SOURCE_ROOT; };
+		34B386911C5AB1B90054586A /* WebPageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebPageViewController.h; sourceTree = "<group>"; };
+		34B386921C5AB1B90054586A /* WebPageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebPageViewController.m; sourceTree = "<group>"; };
+		34B386931C5AB1B90054586A /* WebPageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = WebPageViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +117,7 @@
 				345A6A1D1C594138000D573C /* AppDelegate */,
 				345A6A1C1C59412B000D573C /* ViewController */,
 				345A6A1A1C5940EF000D573C /* MapViewController.xib */,
+				34B386901C5AB1700054586A /* WebPageViewController */,
 				345A6A011C593EA2000D573C /* Assets.xcassets */,
 				345A69F51C593EA2000D573C /* Supporting Files */,
 			);
@@ -178,6 +184,16 @@
 				34B386841C5A62B80054586A /* DataAccessObject.m */,
 			);
 			name = DAO;
+			sourceTree = "<group>";
+		};
+		34B386901C5AB1700054586A /* WebPageViewController */ = {
+			isa = PBXGroup;
+			children = (
+				34B386911C5AB1B90054586A /* WebPageViewController.h */,
+				34B386921C5AB1B90054586A /* WebPageViewController.m */,
+				34B386931C5AB1B90054586A /* WebPageViewController.xib */,
+			);
+			name = WebPageViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -266,6 +282,7 @@
 				34B386891C5A8F9B0054586A /* birerria.jpeg in Resources */,
 				345A6A1B1C5940EF000D573C /* MapViewController.xib in Resources */,
 				34B3868B1C5A95FA0054586A /* turntotech.png in Resources */,
+				34B386951C5AB1BA0054586A /* WebPageViewController.xib in Resources */,
 				34B3868F1C5A98550054586A /* indikitch.jpg in Resources */,
 				34B3868E1C5A98550054586A /* eisenbergs.jpg in Resources */,
 				345A6A1F1C594B72000D573C /* logo.png in Resources */,
@@ -286,6 +303,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34B386941C5AB1BA0054586A /* WebPageViewController.m in Sources */,
 				34B386851C5A62B80054586A /* DataAccessObject.m in Sources */,
 				345A69FD1C593EA2000D573C /* MapViewController.m in Sources */,
 				345A69FA1C593EA2000D573C /* AppDelegate.m in Sources */,

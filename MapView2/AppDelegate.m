@@ -18,12 +18,20 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     
-    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[MapViewController alloc] initWithNibName:@"MapViewController" bundle:nil];
-    self.window.rootViewController = self.viewController;
+    MapViewController *rootController = [[MapViewController alloc]
+                                                       initWithNibName:@"MapViewController" bundle:nil];
+    
+    self.navigationController = [[UINavigationController alloc]
+                                                initWithRootViewController:rootController];
+    
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+    
+    [self.window setRootViewController:self.navigationController];
     [self.window makeKeyAndVisible];
+    
     return YES;
+
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

@@ -67,6 +67,11 @@
             pinView.leftCalloutAccessoryView = imageView;
         }
         
+        // Because this is an iOS app, add the detail disclosure button to display details about the annotation in another view.
+        UIButton *rightButton = [UIButton buttonWithType:UIButtonTypeDetailDisclosure];
+        //[rightButton addTarget:nil action:nil forControlEvents:UIControlEventTouchUpInside];
+        pinView.rightCalloutAccessoryView = rightButton;
+        
     }
     else {
         pinView.annotation = annotation;
