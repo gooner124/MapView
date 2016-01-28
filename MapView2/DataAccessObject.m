@@ -53,7 +53,7 @@
 #pragma mark Add the TTT Pin
 -(MKPointAnnotation *)addTTTAnnotationToMap:(MKMapView *)mapView {
     
-    CLLocationCoordinate2D turnToTechCoord = CLLocationCoordinate2DMake(40.741424, -73.989964);
+    CLLocationCoordinate2D turnToTechCoord = CLLocationCoordinate2DMake(40.741454, -73.989898);
     MKPointAnnotation *pointAnnotation = [[MKPointAnnotation alloc] init];
     
     pointAnnotation.coordinate = turnToTechCoord;
@@ -86,6 +86,34 @@
         default:
             break;
     }
+}
+
+-(NSMutableArray *) restaurantPins {
+    NSMutableArray *restaurantPins = [NSMutableArray new];
+    
+    CLLocationCoordinate2D birreriaCoord = CLLocationCoordinate2DMake(40.741938, -73.989957);
+    MKPointAnnotation *birreriaAnnotation = [MKPointAnnotation new];
+    birreriaAnnotation.coordinate = birreriaCoord;
+    birreriaAnnotation.title = @"Birreria";
+    birreriaAnnotation.subtitle = @"Refined Italian gastropub with a view";
+    
+    CLLocationCoordinate2D indikitchCoord = CLLocationCoordinate2DMake(40.742166, -73.990475);
+    MKPointAnnotation *indikitchAnnotation = [MKPointAnnotation new];
+    indikitchAnnotation.coordinate = indikitchCoord;
+    indikitchAnnotation.title = @"Indikitch";
+    indikitchAnnotation.subtitle = @"Simple Indian fast-food eatery";
+    
+    CLLocationCoordinate2D eisenbergsCoord = CLLocationCoordinate2DMake(40.741102, -73.990132);
+    MKPointAnnotation *eisenbergsAnnotation = [MKPointAnnotation new];
+    eisenbergsAnnotation.coordinate = eisenbergsCoord;
+    eisenbergsAnnotation.title = @"Eisenberg's Sandwich Shop";
+    eisenbergsAnnotation.subtitle = @"Casual stalwart, open since 1929";
+    
+    [restaurantPins addObject:birreriaAnnotation];
+    [restaurantPins addObject:indikitchAnnotation];
+    [restaurantPins addObject:eisenbergsAnnotation];
+    
+    return restaurantPins;
 }
 
 @end

@@ -17,6 +17,7 @@
 @property(nonatomic,retain)IBOutlet MKMapView *mapView;
 @property(nonatomic, strong) MKPointAnnotation *turnToTechAnnotation;
 @property(nonatomic, strong) MKAnnotationView *turnToTechAnnotationView;
+@property(nonatomic, strong) MKAnnotationView *restaurantAnnotationView;
 
 @end
 
@@ -46,7 +47,8 @@
     [self addTTTAnnotationToMap];
     self.turnToTechAnnotationView = [self mapView:self.mapView
                                 viewForAnnotation:self.turnToTechAnnotation];
-    
+    [self addRestaurantPins];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,7 +76,18 @@
 
 -(MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
 
-    return [[DataAccessObject sharedDAO] mapView:self.mapView viewForAnnotation:self.turnToTechAnnotation];
+    return [[DataAccessObject sharedDAO] mapView:mapView viewForAnnotation:annotation];
+}
+
+-(void)addRestaurantPins {
+    NSMutableArray *restaurantPins = [[DataAccessObject sharedDAO] restaurantPins];
+    MKAnnotationView *annotationView = [MKAnnotationView new];
+    [self.mapView addAnnotations:restaurantPins];
+    for (MKPointAnnotation *pointAnnotation in restaurantPins) {
+        annotationView = [self mapView:self.mapView
+                     viewForAnnotation:pointAnnotation];
+    }
+
 }
 
 @end

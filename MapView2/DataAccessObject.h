@@ -19,4 +19,6 @@
 -(MKPointAnnotation *)addTTTAnnotationToMap:(MKMapView *)mapView;
 //Set different type of map
 -(void)setMap:(id)sender mapView:(MKMapView *)mapView;
+//Hard Code Pins for nearby restaurants
+-(NSMutableArray *) restaurantPins;
 @end
