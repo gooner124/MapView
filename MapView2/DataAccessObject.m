@@ -22,7 +22,7 @@
 
 #pragma mark Create Pin Annotation Views
 -(MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
-    
+    UIImage *image = [UIImage new];
     // If the annotation is the user location, just return nil.
     if ([annotation isKindOfClass:[MKUserLocation class]])
         return nil;
@@ -41,9 +41,36 @@
         pinView.animatesDrop = YES;
         pinView.canShowCallout = YES;
         
+        UIView *viewLeftAccessory = [[UIView alloc] initWithFrame:
+                                     CGRectMake(0, 0, pinView.frame.size.height, pinView.frame.size.height)];
+        
+        UIImageView *imageView=[[UIImageView alloc] initWithFrame:
+                                CGRectMake(0, 0, pinView.frame.size.height, pinView.frame.size.height)];
+        imageView.image = image;
+        imageView.contentMode = UIViewContentModeScaleAspectFit;
+        
+        [viewLeftAccessory addSubview:imageView];
+        
+        pinView.leftCalloutAccessoryView=viewLeftAccessory;
+        
+        if ([[annotation title] isEqualToString:@"TurnToTech"]) {
+            imageView.image = [UIImage imageNamed:@"turntotech.png"];
+            pinView.leftCalloutAccessoryView = imageView;
+        }else if ([[annotation title] isEqualToString:@"Birreria"]){
+            imageView.image = [UIImage imageNamed:@"birerria.jpeg"];
+            pinView.leftCalloutAccessoryView = imageView;
+        }else if ([[annotation title] isEqualToString:@"Indikitch"]) {
+            imageView.image = [UIImage imageNamed:@"indikitch.jpg"];
+            pinView.leftCalloutAccessoryView = imageView;
+        }else {
+            imageView.image = [UIImage imageNamed:@"eisenbergs.jpg"];
+            pinView.leftCalloutAccessoryView = imageView;
+        }
+        
     }
     else {
         pinView.annotation = annotation;
+        
     }
     
     return pinView;

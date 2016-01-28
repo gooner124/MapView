@@ -17,7 +17,6 @@
 @property(nonatomic,retain)IBOutlet MKMapView *mapView;
 @property(nonatomic, strong) MKPointAnnotation *turnToTechAnnotation;
 @property(nonatomic, strong) MKAnnotationView *turnToTechAnnotationView;
-@property(nonatomic, strong) MKAnnotationView *restaurantAnnotationView;
 
 @end
 
@@ -81,12 +80,8 @@
 
 -(void)addRestaurantPins {
     NSMutableArray *restaurantPins = [[DataAccessObject sharedDAO] restaurantPins];
-    MKAnnotationView *annotationView = [MKAnnotationView new];
     [self.mapView addAnnotations:restaurantPins];
-    for (MKPointAnnotation *pointAnnotation in restaurantPins) {
-        annotationView = [self mapView:self.mapView
-                     viewForAnnotation:pointAnnotation];
-    }
+
 
 }
 

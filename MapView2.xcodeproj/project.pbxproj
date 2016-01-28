@@ -20,6 +20,10 @@
 		345A6A281C594C05000D573C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345A6A271C594C05000D573C /* MapKit.framework */; };
 		345A6A2A1C594C0E000D573C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345A6A291C594C0E000D573C /* CoreLocation.framework */; };
 		34B386851C5A62B80054586A /* DataAccessObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B386841C5A62B80054586A /* DataAccessObject.m */; };
+		34B386891C5A8F9B0054586A /* birerria.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = 34B386881C5A8F9B0054586A /* birerria.jpeg */; };
+		34B3868B1C5A95FA0054586A /* turntotech.png in Resources */ = {isa = PBXBuildFile; fileRef = 34B3868A1C5A95FA0054586A /* turntotech.png */; };
+		34B3868E1C5A98550054586A /* eisenbergs.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 34B3868C1C5A98550054586A /* eisenbergs.jpg */; };
+		34B3868F1C5A98550054586A /* indikitch.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 34B3868D1C5A98550054586A /* indikitch.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +57,10 @@
 		345A6A291C594C0E000D573C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		34B386831C5A62B80054586A /* DataAccessObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAccessObject.h; sourceTree = "<group>"; };
 		34B386841C5A62B80054586A /* DataAccessObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAccessObject.m; sourceTree = "<group>"; };
+		34B386881C5A8F9B0054586A /* birerria.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = birerria.jpeg; sourceTree = SOURCE_ROOT; };
+		34B3868A1C5A95FA0054586A /* turntotech.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = turntotech.png; sourceTree = SOURCE_ROOT; };
+		34B3868C1C5A98550054586A /* eisenbergs.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = eisenbergs.jpg; sourceTree = SOURCE_ROOT; };
+		34B3868D1C5A98550054586A /* indikitch.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = indikitch.jpg; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +121,10 @@
 		345A69F51C593EA2000D573C /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				34B3868C1C5A98550054586A /* eisenbergs.jpg */,
+				34B3868D1C5A98550054586A /* indikitch.jpg */,
+				34B3868A1C5A95FA0054586A /* turntotech.png */,
+				34B386881C5A8F9B0054586A /* birerria.jpeg */,
 				345A6A1E1C594B72000D573C /* logo.png */,
 				345A6A061C593EA2000D573C /* Info.plist */,
 				345A69F61C593EA2000D573C /* main.m */,
@@ -251,7 +263,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				345A6A021C593EA2000D573C /* Assets.xcassets in Resources */,
+				34B386891C5A8F9B0054586A /* birerria.jpeg in Resources */,
 				345A6A1B1C5940EF000D573C /* MapViewController.xib in Resources */,
+				34B3868B1C5A95FA0054586A /* turntotech.png in Resources */,
+				34B3868F1C5A98550054586A /* indikitch.jpg in Resources */,
+				34B3868E1C5A98550054586A /* eisenbergs.jpg in Resources */,
 				345A6A1F1C594B72000D573C /* logo.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
