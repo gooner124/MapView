@@ -19,6 +19,7 @@
 		345A6A261C594BFE000D573C /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345A6A251C594BFE000D573C /* UIKit.framework */; };
 		345A6A281C594C05000D573C /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345A6A271C594C05000D573C /* MapKit.framework */; };
 		345A6A2A1C594C0E000D573C /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 345A6A291C594C0E000D573C /* CoreLocation.framework */; };
+		34B386851C5A62B80054586A /* DataAccessObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 34B386841C5A62B80054586A /* DataAccessObject.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,6 +51,8 @@
 		345A6A251C594BFE000D573C /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		345A6A271C594C05000D573C /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		345A6A291C594C0E000D573C /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		34B386831C5A62B80054586A /* DataAccessObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataAccessObject.h; sourceTree = "<group>"; };
+		34B386841C5A62B80054586A /* DataAccessObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataAccessObject.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -97,6 +100,7 @@
 		345A69F41C593EA2000D573C /* MapView2 */ = {
 			isa = PBXGroup;
 			children = (
+				34B386821C5A62910054586A /* DAO */,
 				345A6A1D1C594138000D573C /* AppDelegate */,
 				345A6A1C1C59412B000D573C /* ViewController */,
 				345A6A1A1C5940EF000D573C /* MapViewController.xib */,
@@ -153,6 +157,15 @@
 				345A6A211C594BED000D573C /* Foundation.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		34B386821C5A62910054586A /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				34B386831C5A62B80054586A /* DataAccessObject.h */,
+				34B386841C5A62B80054586A /* DataAccessObject.m */,
+			);
+			name = DAO;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -257,6 +270,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				34B386851C5A62B80054586A /* DataAccessObject.m in Sources */,
 				345A69FD1C593EA2000D573C /* MapViewController.m in Sources */,
 				345A69FA1C593EA2000D573C /* AppDelegate.m in Sources */,
 				345A69F71C593EA2000D573C /* main.m in Sources */,

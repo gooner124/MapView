@@ -7,8 +7,16 @@
 //
 
 #import "MapViewController.h"
+#import "DataAccessObject.h"
 
-@interface MapViewController ()
+@interface MapViewController () {
+    
+}
+
+@property(nonatomic,strong) CLLocationManager *locationManager;
+@property(nonatomic,retain)IBOutlet MKMapView *mapView;
+@property(nonatomic, strong) MKPointAnnotation *turnToTechAnnotation;
+@property(nonatomic, strong) MKAnnotationView *turnToTechAnnotationView;
 
 @end
 
@@ -27,19 +35,7 @@
 #pragma mark - Set Different type of map
 -(IBAction)setMap:(id)sender
 {
-    switch (((UISegmentedControl *)sender).selectedSegmentIndex) {
-        case 0:
-            self.mapView.mapType = MKMapTypeStandard;
-            break;
-        case 1:
-            self.mapView.mapType = MKMapTypeHybrid;
-            break;
-        case 2:
-            self.mapView.mapType = MKMapTypeSatellite;
-            break;
-        default:
-            break;
-    }
+    [[DataAccessObject sharedDAO] setMap:sender mapView:self.mapView];
 }
 
 - (void)viewDidLoad
@@ -47,6 +43,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
     self.mapView.showsUserLocation = YES;
+    [self addTTTAnnotationToMap];
+    self.turnToTechAnnotationView = [self mapView:self.mapView
+                                viewForAnnotation:self.turnToTechAnnotation];
     
 }
 
@@ -64,6 +63,18 @@
           userLocation.location.coordinate.longitude);
     MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(userLocation.location.coordinate, 250, 250);
     [self.mapView setRegion:region animated:YES];
+    
+}
+
+-(void)addTTTAnnotationToMap {
+    
+    self.turnToTechAnnotation = [[DataAccessObject sharedDAO] addTTTAnnotationToMap:self.mapView];
+    
+}
+
+-(MKAnnotationView *) mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+
+    return [[DataAccessObject sharedDAO] mapView:self.mapView viewForAnnotation:self.turnToTechAnnotation];
 }
 
 @end

@@ -12,8 +12,10 @@
 
 @interface MapViewController : UIViewController<CLLocationManagerDelegate, MKMapViewDelegate>
 
-@property(nonatomic,strong) CLLocationManager *locationManager;
-@property(nonatomic,retain)IBOutlet MKMapView *mapView;
+//@property(nonatomic,strong) CLLocationManager *locationManager;
+//@property(nonatomic,retain)IBOutlet MKMapView *mapView;
+//@property(nonatomic, strong) MKPointAnnotation *turnToTechAnnotation;
+//@property(nonatomic, strong) MKAnnotationView *turnToTechAnnotationView;
 
 
 #pragma mark - IBAction method
