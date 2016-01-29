@@ -21,6 +21,9 @@
 @property(nonatomic, strong) MKPointAnnotation *turnToTechAnnotation;
 @property(nonatomic, strong) MKAnnotationView *turnToTechAnnotationView;
 @property(nonatomic, strong) WebPageViewController *webPageViewController;
+@property(nonatomic, strong) NSMutableArray *mapItems;
+@property(nonatomic, strong) NSMutableArray *restaurantSearchPins;
+@property(nonatomic, strong) NSMutableArray *localSearchArray;
 
 @end
 
@@ -46,12 +49,17 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
+    UISearchBar *searchBar = [[UISearchBar alloc] init];
+    searchBar.delegate = self;
+    searchBar.placeholder = @"Search";
+    self.navigationItem.titleView = searchBar;
+    
     self.mapView.showsUserLocation = YES;
     [self addTTTAnnotationToMap];
     self.turnToTechAnnotationView = [self mapView:self.mapView
                                 viewForAnnotation:self.turnToTechAnnotation];
     [self addRestaurantPins];
-
+    [self createRestaurantSearch];
 }
 
 - (void)didReceiveMemoryWarning
@@ -98,21 +106,156 @@
     
     self.webPageViewController.title = view.annotation.title;
     NSString *title = view.annotation.title;
+    NSURL *url;
     if ([title isEqualToString:@"TurnToTech"]) {
-       self.webPageViewController.annotationURl = @"http://turntotech.io/";
+        url = [[NSURL alloc] initWithString:@"http://turntotech.io/"];
+        self.webPageViewController.annotationURl =  url;
         
     } else if ([title isEqualToString:@"Birreria"]) {
-        self.webPageViewController.annotationURl = @"https://www.eataly.com/us_en/stores/new-york/nyc-la-birreria/";
+        url = [[NSURL alloc] initWithString:@"https://www.eataly.com/us_en/stores/new-york/nyc-la-birreria/"];
+        self.webPageViewController.annotationURl = url;
 
     } else if ([title isEqualToString:@"Indikitch"]) {
-        self.webPageViewController.annotationURl = @"http://indikitch.com/";
+        url = [[NSURL alloc] initWithString:@"http://indikitch.com/"];
+        self.webPageViewController.annotationURl = url;
         
-    } else {
-        self.webPageViewController.annotationURl = @"https://www.seamless.com/menu/eisenbergs-sandwich-shop-inc-174-5th-ave-new-york-/292071";
+    } else if([title isEqualToString:@"Eisenberg's Sandwich Shop"]){
+        url = [[NSURL alloc] initWithString:@"https://www.seamless.com/menu/eisenbergs-sandwich-shop-inc-174-5th-ave-new-york-/292071"];
+        self.webPageViewController.annotationURl = url;
 
+    }else {
+        for (MKMapItem *item in self.mapItems) {
+            if ([item.name isEqualToString:view.annotation.title]) {
+                self.webPageViewController.annotationURl = item.url;
+            }
+        }
     }
     
     [self.navigationController pushViewController:self.webPageViewController animated:YES];
 }
 
+#pragma mark use MKLocalSearch 
+
+-(void)createRestaurantSearch {
+    // Create and initialize a search request object.
+    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
+    request.naturalLanguageQuery = @"Restaurant";
+    request.region = self.mapView.region;
+    
+    // Create and initialize a search object.
+    MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
+    
+    // Start the search and display the results as annotations on the map.
+    [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error)
+    {
+        NSMutableArray *placemarks = [NSMutableArray array];
+        self.mapItems = [[NSMutableArray alloc] init];
+        if (!error) {
+            for (MKMapItem *item in response.mapItems) {
+                [placemarks addObject:item.placemark];
+                [self.mapItems addObject:item];
+            }
+        } else {
+            NSLog(@"Search Request Error: %@", [error localizedDescription]);
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Network Connection" message:@"Sorry, no network connection." preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                               style:UIAlertActionStyleDefault
+                                                             handler:nil];
+            [alertController addAction:actionOk];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+        
+        self.restaurantSearchPins = [[NSMutableArray alloc] init];
+        self.restaurantSearchPins = [[DataAccessObject sharedDAO] addLocalSearchRestaurants:self.mapItems];
+        [self.mapView setRegion:response.boundingRegion];
+        [self.mapView showAnnotations:self.restaurantSearchPins animated:NO];
+    }];
+}
+
+#pragma mark Search button clicked
+- (void)searchBarSearchButtonClicked:(UISearchBar *)searchBar {
+    NSString *searchText = searchBar.text;
+    NSMutableArray *mapItems = [NSMutableArray new];
+    self.localSearchArray = [NSMutableArray new];
+    
+    // Create and initialize a search request object.
+    MKLocalSearchRequest *request = [[MKLocalSearchRequest alloc] init];
+    request.naturalLanguageQuery = searchText;
+    request.region = self.mapView.region;
+    
+    // Create and initialize a search object.
+    MKLocalSearch *search = [[MKLocalSearch alloc] initWithRequest:request];
+    
+    // Start the search and display the results as annotations on the map.
+    [search startWithCompletionHandler:^(MKLocalSearchResponse *response, NSError *error)
+     {
+         if (!error) {
+             for (MKMapItem *item in response.mapItems) {
+                 [mapItems addObject:item];
+             }
+         } else {
+             NSLog(@"Search Request Error: %@", [error localizedDescription]);
+             
+             UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"No Network Connection" message:@"Sorry, no network connection." preferredStyle:UIAlertControllerStyleAlert];
+             UIAlertAction *actionOk = [UIAlertAction actionWithTitle:@"Ok"
+                                                                style:UIAlertActionStyleDefault
+                                                              handler:nil];
+             [alertController addAction:actionOk];
+             [self presentViewController:alertController animated:YES completion:nil];
+         }
+         
+         
+         self.localSearchArray = [[NSMutableArray alloc] initWithArray:
+                                  [[DataAccessObject sharedDAO] addLocalSearchRestaurants:mapItems]];
+         
+         [self.mapView setRegion:response.boundingRegion];
+         [self.mapView showAnnotations:self.localSearchArray animated:NO];
+     }];
+    
+}
+
+#pragma mark Cancel button clicked
+-(void)searchBarCancelButtonClicked:(UISearchBar *)searchBar
+{
+    searchBar.text = @"";
+    [searchBar resignFirstResponder];
+}
+
+#pragma mark should begin editing text
+-(BOOL)searchBarShouldBeginEditing:(UISearchBar *)searchBar{
+    
+    [searchBar setShowsCancelButton:YES];
+    return YES;
+}
+
+#pragma mark should end editing
+- (BOOL)searchBarShouldEndEditing:(UISearchBar *)searchBar {
+    if ([searchBar.text isEqualToString:@""]) {
+        [searchBar setShowsCancelButton:NO];
+        return YES;
+    } else {
+        return NO;
+    }
+}
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

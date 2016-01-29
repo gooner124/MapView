@@ -11,6 +11,6 @@
 
 @interface WebPageViewController : UIViewController <WKNavigationDelegate>
 
-@property (nonatomic, strong) NSString *annotationURl;
+@property (nonatomic, strong) NSURL *annotationURl;
 
 @end

@@ -21,4 +21,9 @@
 -(void)setMap:(id)sender mapView:(MKMapView *)mapView;
 //Hard Code Pins for nearby restaurants
 -(NSMutableArray *) restaurantPins;
+//Add restaurants from local search
+-(NSMutableArray *) addLocalSearchRestaurants:(NSMutableArray *) mapItems;
+//MKLocalSearch from search bar entries
+-(NSMutableArray *) localSearch:(NSMutableArray *)searchArray;
+
 @end

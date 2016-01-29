@@ -7,7 +7,15 @@
 //
 
 #import "DataAccessObject.h"
+#import "MapViewController.h"
 
+@interface DataAccessObject () {
+    
+}
+
+@property (nonatomic, strong) NSMutableArray *restaurantSearchPins;
+
+@end
 
 @implementation DataAccessObject
 
@@ -62,8 +70,11 @@
         }else if ([[annotation title] isEqualToString:@"Indikitch"]) {
             imageView.image = [UIImage imageNamed:@"indikitch.jpg"];
             pinView.leftCalloutAccessoryView = imageView;
-        }else {
+        }else if([[annotation title] isEqualToString:@"Eisenberg's Sandwich Shop"]){
             imageView.image = [UIImage imageNamed:@"eisenbergs.jpg"];
+            pinView.leftCalloutAccessoryView = imageView;
+        }else {
+            imageView.image = [UIImage imageNamed:@"default_logo.jpeg"];
             pinView.leftCalloutAccessoryView = imageView;
         }
         
@@ -120,6 +131,8 @@
     }
 }
 
+#pragma mark add hard coded restaurant pins
+
 -(NSMutableArray *) restaurantPins {
     NSMutableArray *restaurantPins = [NSMutableArray new];
     
@@ -148,4 +161,51 @@
     return restaurantPins;
 }
 
+#pragma mark add mklocalsearch restaurants
+-(NSMutableArray *) addLocalSearchRestaurants:(NSMutableArray *) mapItems {
+
+    self.restaurantSearchPins = [[NSMutableArray alloc] init];
+    for (MKMapItem *item in mapItems) {
+        MKPointAnnotation *restaurantPin = [MKPointAnnotation new];
+        CLLocationCoordinate2D coordinates = CLLocationCoordinate2DMake(item.placemark.coordinate.latitude,
+                                                                  item.placemark.coordinate.longitude);
+        restaurantPin.coordinate = coordinates;
+        restaurantPin.title = item.name;
+        restaurantPin.subtitle = item.phoneNumber;
+        [self.restaurantSearchPins addObject:restaurantPin];
+
+    }
+    
+    return self.restaurantSearchPins;
+}
+
+#pragma mark create local search from search bar entry
+-(NSMutableArray *) localSearch:(NSMutableArray *)searchArray {
+    NSMutableArray * mapItems = [[NSMutableArray alloc] init];
+    for (MKMapItem *item in searchArray) {
+        MKPointAnnotation *searchPin = [MKPointAnnotation new];
+        CLLocationCoordinate2D coordinates = CLLocationCoordinate2DMake(item.placemark.coordinate.latitude,
+                                                                        item.placemark.coordinate.longitude);
+        searchPin.coordinate = coordinates;
+        searchPin.title = item.name;
+        searchPin.subtitle = item.phoneNumber;
+        [mapItems addObject:searchPin];
+    }
+        
+    
+
+
+    return mapItems;
+}
+
 @end
+
+
+
+
+
+
+
+
+
+

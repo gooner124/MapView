@@ -10,7 +10,8 @@
 #import <MapKit/MapKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface MapViewController : UIViewController<CLLocationManagerDelegate, MKMapViewDelegate>
+@interface MapViewController : UIViewController<CLLocationManagerDelegate, MKMapViewDelegate, UISearchBarDelegate>
+
 
 
 #pragma mark - IBAction method

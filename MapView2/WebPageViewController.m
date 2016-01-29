@@ -19,7 +19,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view from its nib.
-    NSURL *urlToLoad = [NSURL URLWithString:self.annotationURl];
+    NSURL *urlToLoad = self.annotationURl;
     NSURLRequest *request = [NSURLRequest requestWithURL:urlToLoad];
     
     WKWebViewConfiguration *theConfiguration = [[WKWebViewConfiguration alloc] init];
